@@ -13,24 +13,15 @@ protocol HomeViewProtocol: AnyObject {
 
 protocol ModifyScreenDelegate: AnyObject {
     func timerScreen()
-    func indexRandom() -> Int
-    func modifyScreen(screen : HomeViewModel)
-    func changeScreen()
 }
 
-final class HomeView: UIView, ConfigViewProtocol {
+class HomeView: UIView, ConfigViewProtocol {
     
     weak var delegate: HomeViewProtocol?
     
     weak var modifyScreenDelegate: ModifyScreenDelegate?
   
     var viewModel: HomeViewModel?
-    
-    var pokemonScreen = [HomeViewModel(backgroundColor: .systemBlue, image: UIImage(named: "Squirtle")),
-                         HomeViewModel(backgroundColor: .systemOrange, image: UIImage(named: "Charmander")),
-                         HomeViewModel(backgroundColor: .systemGreen, image: UIImage(named: "Bulbasaur")),
-                         HomeViewModel(backgroundColor: .yellow, image: UIImage(named: "Pikachu"))]
-
     
     lazy var titleImageView: UIImageView = {
         let image = UIImageView()
@@ -84,6 +75,15 @@ final class HomeView: UIView, ConfigViewProtocol {
     
     @objc func tappedButton() {
         self.delegate?.tappedButton()
+    }
+    
+    func configModifyScreenDelegate(delegate: ModifyScreenDelegate?) {
+        self.modifyScreenDelegate = delegate
+        startModifierFunctions()
+    }
+    
+    func startModifierFunctions() {
+        modifyScreenDelegate?.timerScreen()
     }
     
     func aditionalConfigs() {
