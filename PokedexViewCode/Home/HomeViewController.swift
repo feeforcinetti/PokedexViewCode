@@ -26,12 +26,12 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         homeView?.configModifyScreenDelegate(delegate: self)
+        homeView?.delegate = self
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         homeView?.configCornerRadius()
-        homeView?.delegate = self
     }
 
     private func indexRandom() -> Int {

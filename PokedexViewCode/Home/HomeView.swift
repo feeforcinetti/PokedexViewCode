@@ -35,7 +35,7 @@ class HomeView: UIView, ConfigViewProtocol {
     lazy var circleView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.2)
+        view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.1)
         
         return view
     }()

@@ -13,10 +13,14 @@ class PokedexView: UIView, ConfigViewProtocol {
         let collection = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout.init())
         collection.translatesAutoresizingMaskIntoConstraints = false
         collection.showsVerticalScrollIndicator = false
-//        collection.register(<#T##cellClass: AnyClass?##AnyClass?#>, forCellWithReuseIdentifier: <#T##String#>)
-        collection.backgroundColor = .red
-       
+        collection.register(PokedexCollectionViewCell.self, forCellWithReuseIdentifier: PokedexCollectionViewCell.indentifier)
+        collection.backgroundColor = .darkGray
+        
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout.init()
+        layout.scrollDirection = .vertical
+        collection.setCollectionViewLayout(layout, animated: false)
         return collection
+            
     }()
   
     override init(frame: CGRect) {
@@ -32,15 +36,19 @@ class PokedexView: UIView, ConfigViewProtocol {
         addSubview(self.collectionView)
     }
     
+    func configCollectionViewProtocols(delegate: UICollectionViewDelegate, dataSource: UICollectionViewDataSource) {
+        self.collectionView.delegate = delegate
+        self.collectionView.dataSource = dataSource
+    }
+
     func setupConstraints() {
         NSLayoutConstraint.activate([
+            
             self.collectionView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 150),
-            self.collectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 25),
-            self.collectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -25),
+            self.collectionView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 22),
+            self.collectionView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -22),
             self.collectionView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             
-        
-        
         ])
     }
     
